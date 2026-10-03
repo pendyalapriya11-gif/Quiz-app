@@ -1,61 +1,29 @@
 import { useState } from "react";
-
+import { data } from "./questions";
+import Question from "./Question";
 function App() {
-  const data = [
-    {
-      id: 1,
-      question: "Which is used to develop frontend applications?",
-      options: ["React", "Node.js", "MongoDB", "Express"],
-      answer: "React",
-    },
-    {
-      id: 2,
-      question: "Which is used to develop backend applications?",
-      options: ["React", "Node.js", "MongoDB", "Express"],
-      answer: "Node.js",
-    },
-  ];
   const [option, setOption] = useState("");
   const [isAnswered, setisAnswered] = useState(false);
   const [questionid, setQuestionid] = useState(0);
   const [isLast, setLast] = useState(false);
   const [score, setScore] = useState(0);
   return isLast ? (
-    <>
+    <div className="finished-page">
       <p>Finished</p>
       <p>Your Total Score is {score} </p>
-    </>
+      <button onClick={()=> {
+        setOption("");
+        setisAnswered(false);
+        setQuestionid(0);
+        setLast(false);
+        setScore(0);
+      }} className="restart-button">Restart</button>
+    </div>
   ) : (
     <>
-      <h3>Question {questionid + 1} : </h3>
-      <p>{data[questionid].question}</p>
-      <ul>
-        {data[questionid].options.map((optionitem) => {
-          return (
-            <li
-              key={optionitem}
-              onClick={() => {
-                if (isAnswered===false) {
-                  setOption(optionitem);
-                  setisAnswered(true);
-                }
-              }}
-            >
-              {optionitem} {isAnswered && option === optionitem ? option === data[questionid].answer ? "✓" : "✗" : ""}
-            </li>
-          );
-        })}
-      </ul>
-      {isAnswered ? (
-        option === data[questionid].answer ? (
-          <p>Correct</p>
-        ) : (
-          <p>Incorrect</p>
-        )
-      ) : (
-        "No Option Selected"
-      )}
+      <Question questionid={questionid} isAnswered={isAnswered} setOption={setOption} setisAnswered={setisAnswered} option={option}/>
       <button
+        className="next-button"
         onClick={() => {
           option === data[questionid].answer
             ? setScore(score + 1)
@@ -67,7 +35,7 @@ function App() {
             : setLast(true);
         }}
       >
-        next
+        Next
       </button>
     </>
   );
