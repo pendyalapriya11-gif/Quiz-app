@@ -34,6 +34,7 @@ function App() {
             ? setQuestionid(questionid + 1)
             : setLast(true);
         }}
+        disabled={!isAnswered}
       >
         Next
       </button>

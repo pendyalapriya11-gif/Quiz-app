@@ -1,6 +1,5 @@
 import { data } from "./questions";
 import "./App.css";
-import { useState } from "react";
 function Question({
   questionid,
   isAnswered,
@@ -8,7 +7,6 @@ function Question({
   setisAnswered,
   option,
 }) {
-  const [isClicked, setIsClicked] = useState(false);
   return (
     <div>
       <h3 style={{margin: "10px"}}>
@@ -21,7 +19,6 @@ function Question({
             backgroundColor: "black",
             height: "7px",
             borderRadius: "5px",
-            margin: "10px"
           }}
         ></div>
       </div>
@@ -39,7 +36,7 @@ function Question({
                     setisAnswered(true);
                   }
                 }}
-                style={{border: `1px solid ${isAnswered && option===optionitem ? option===data[questionid].answer ? "#90EE90" : "red" : ""}`}}
+                style={{backgroundColor: `${isAnswered && option===optionitem ? option===data[questionid].answer ? "green" : "red" : isAnswered && optionitem===data[questionid].answer ? "green" : ""}`}}
               >
                 {isAnswered && option === optionitem
                   ? option === data[questionid].answer
