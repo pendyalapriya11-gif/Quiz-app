@@ -12,13 +12,15 @@ function Question({
       <h3 style={{margin: "10px"}}>
         Question {questionid + 1} of {data.length} :{" "}
       </h3>
-      <div style={{ height: "14px" }}>
+      <div style={{ height: "14px", backgroundColor: "pink", height: "7px",
+            borderRadius: "5px", }}>
         <div
           style={{
             width: `${((questionid + 1) / data.length) * 100}%`,
             backgroundColor: "black",
             height: "7px",
             borderRadius: "5px",
+            transition: "width 0.3s ease"
           }}
         ></div>
       </div>
@@ -38,11 +40,6 @@ function Question({
                 }}
                 style={{backgroundColor: `${isAnswered && option===optionitem ? option===data[questionid].answer ? "green" : "red" : isAnswered && optionitem===data[questionid].answer ? "green" : ""}`}}
               >
-                {isAnswered && option === optionitem
-                  ? option === data[questionid].answer
-                    ? <span style={{color: "green",fontSize:"18px"}}>&#10004;</span>
-                    : <span style={{color: "red",fontSize:"18px"}}>&#10006;</span>
-                  : ""}{"   "}
                 {optionitem}
               </button>
             );
